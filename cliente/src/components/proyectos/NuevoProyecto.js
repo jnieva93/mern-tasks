@@ -7,7 +7,7 @@ const NuevoProyecto = () => {
   const proyectosContext = useContext(proyectoContext);
 
   const { nombre } = proyecto;
-  const { formulario } = proyectosContext;
+  const { formulario, mostrarFormulario } = proyectosContext;
 
   const handleChangeProyecto = e => {
     setProyecto({
@@ -25,6 +25,7 @@ const NuevoProyecto = () => {
       <button
         type='button'
         className='btn btn-block btn-primario'
+        onClick={mostrarFormulario}
       >
         Nuevo Proyecto
       </button>

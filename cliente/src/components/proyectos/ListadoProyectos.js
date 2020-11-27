@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import proyectoContext from '../../context/proyectos/proyectoContext';
 import Proyecto from './Proyecto';
 
 const ListadoProyectos = () => {
-  const proyectos = [
-    { nombre: 'Tienda Virtual' },
-    { nombre: 'Intranet' },
-    { nombre: 'Diseño de Sitio Web' },
-  ];
+  const proyectosContext = useContext(proyectoContext);
+
+  const { proyectos, obtenerProyectos } = proyectosContext;
+
+  useEffect(() => {
+    obtenerProyectos();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (proyectos.length === 0) return null;
   
   return (
     <ul className='listado-proyectos'>
       {proyectos.map(proyecto => (
-        <Proyecto proyecto={proyecto} />
+        <Proyecto key={proyecto.id} proyecto={proyecto} />
       ))}
     </ul>
   );

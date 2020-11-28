@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
 import proyectoContext from '../../context/proyectos/proyectoContext';
 
+const vInicialProyecto = { nombre: '' };
+
 const NuevoProyecto = () => {
-  const [proyecto, setProyecto] = useState({ nombre: '' });
+  const [proyecto, setProyecto] = useState(vInicialProyecto);
 
   const proyectosContext = useContext(proyectoContext);
 
   const { nombre } = proyecto;
-  const { formulario, mostrarFormulario } = proyectosContext;
+  const { errorForm, formulario, agregarProyecto, mostrarError, mostrarFormulario } = proyectosContext;
 
   const handleChangeProyecto = e => {
     setProyecto({
@@ -18,6 +20,14 @@ const NuevoProyecto = () => {
 
   const handleSubmitProyecto = e => {
     e.preventDefault();
+
+    if (nombre === '') {
+      mostrarError();
+      return;
+    };
+
+    agregarProyecto(proyecto);
+    setProyecto(vInicialProyecto);
   };
   
   return (
@@ -48,6 +58,8 @@ const NuevoProyecto = () => {
           />
         </form>
       }
+
+      {errorForm && <p className='mensaje error'>El nombre del Proyecto es obligatorio</p>}
     </>
   );
 }

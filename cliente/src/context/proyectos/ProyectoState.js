@@ -1,7 +1,8 @@
 import React, { useReducer } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import proyectoContext from './proyectoContext';
 import proyectoReducer from './proyectoReducer';
-import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS } from '../../types';
+import { AGREGAR_PROYECTO, FORMULARIO_PROYECTO, MOSTRAR_ERROR, OBTENER_PROYECTOS } from '../../types';
 
 const hProyectos = [
   { id: 1, nombre: 'Tienda Virtual' },
@@ -11,6 +12,7 @@ const hProyectos = [
 
 const ProyectoState = props => {
   const initialState = {
+    errorForm: false,
     formulario: false,
     proyectos: []
   };
@@ -26,11 +28,27 @@ const ProyectoState = props => {
     dispatch({ type: OBTENER_PROYECTOS, payload: hProyectos });
   };
 
+  const agregarProyecto = proyecto => {
+    const nuevoProyecto = {
+      ...proyecto,
+      id: uuidv4()
+    };
+
+    dispatch({ type: AGREGAR_PROYECTO, payload: nuevoProyecto });
+  };
+
+  const mostrarError = () => {
+    dispatch({ type: MOSTRAR_ERROR });
+  };
+
   return (
     <proyectoContext.Provider
       value={{
+        errorForm: state.errorForm,
         formulario: state.formulario,
         proyectos: state.proyectos,
+        agregarProyecto,
+        mostrarError,
         mostrarFormulario,
         obtenerProyectos
       }}

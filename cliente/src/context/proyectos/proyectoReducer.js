@@ -1,4 +1,4 @@
-import { AGREGAR_PROYECTO, FORMULARIO_PROYECTO, MOSTRAR_ERROR, OBTENER_PROYECTOS } from '../../types';
+import { AGREGAR_PROYECTO, FORMULARIO_PROYECTO, MOSTRAR_ERROR, OBTENER_PROYECTOS, SELECCIONAR_PROYECTO } from '../../types';
 
 const proyectoReducer = (state, action) => {
   switch (action.type) {
@@ -23,6 +23,11 @@ const proyectoReducer = (state, action) => {
       return {
         ...state,
         errorForm: true
+      }
+    case SELECCIONAR_PROYECTO:
+      return {
+        ...state,
+        proyecto: state.proyectos.find(proyecto => proyecto.id === action.payload)
       }
     default:
       return state;

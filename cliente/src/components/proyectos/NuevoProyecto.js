@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
-import proyectoContext from '../../context/proyectos/proyectoContext';
+import ProyectoContext from '../../context/proyectos/proyectoContext';
 
 const vInicialProyecto = { nombre: '' };
 
 const NuevoProyecto = () => {
   const [proyecto, setProyecto] = useState(vInicialProyecto);
 
-  const proyectosContext = useContext(proyectoContext);
+  const proyectosContext = useContext(ProyectoContext);
 
   const { nombre } = proyecto;
   const { errorForm, formulario, agregarProyecto, mostrarError, mostrarFormulario } = proyectosContext;

@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import proyectoContext from './proyectoContext';
+import ProyectoContext from './proyectoContext';
 import proyectoReducer from './proyectoReducer';
 import { AGREGAR_PROYECTO, ELIMINAR_PROYECTO, FORMULARIO_PROYECTO, MOSTRAR_ERROR, OBTENER_PROYECTOS, SELECCIONAR_PROYECTO } from '../../types';
 
@@ -51,7 +51,7 @@ const ProyectoState = props => {
   };
 
   return (
-    <proyectoContext.Provider
+    <ProyectoContext.Provider
       value={{
         errorForm: state.errorForm,
         formulario: state.formulario,
@@ -66,7 +66,7 @@ const ProyectoState = props => {
       }}
     >
       {props.children}
-    </proyectoContext.Provider>
+    </ProyectoContext.Provider>
   );
 }
 

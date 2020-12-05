@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import proyectoContext from '../../context/proyectos/proyectoContext';
+import ProyectoContext from '../../context/proyectos/proyectoContext';
 import Tarea from './Tarea';
 
 const ListadoTareas = () => {
@@ -10,7 +10,7 @@ const ListadoTareas = () => {
     { nombre: 'Elegir Hosting', completa: true }
   ];
 
-  const proyectosContext = useContext(proyectoContext);
+  const proyectosContext = useContext(ProyectoContext);
 
   const { proyecto, eliminarProyecto } = proyectosContext;
 

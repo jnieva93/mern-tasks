@@ -13,7 +13,7 @@ const ListadoProyectos = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (proyectos.length === 0) return null;
+  if (proyectos.length === 0) return <p>No hay proyectos. Comienza creando uno</p>;
   
   return (
     <ul className='listado-proyectos'>

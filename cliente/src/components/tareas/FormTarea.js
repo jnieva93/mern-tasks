@@ -9,7 +9,7 @@ const FormTarea = () => {
   const tareasContext = useContext(TareaContext);
 
   const { proyecto } = proyectosContext;
-  const { agregarTarea } = tareasContext;
+  const { errorTarea, agregarTarea, mostrarErrorTarea, obtenerTareas } = tareasContext;
 
   const [tarea, setTarea] = useState(tareaInicial);
 
@@ -25,9 +25,16 @@ const FormTarea = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
+    if (nombre.trim() === '') {
+      mostrarErrorTarea();
+      return;
+    };
+
     const tareaNueva = { ...tarea, proyectoId: proyecto.id };
 
     agregarTarea(tareaNueva);
+    obtenerTareas(proyecto.id);
+    setTarea(tareaInicial);
   };
 
   if (!proyecto) return null;
@@ -56,6 +63,8 @@ const FormTarea = () => {
           />
         </div>
       </form>
+
+      {errorTarea && <p className='mensaje error'>El nombre de la tarea es obligatorio</p>}
     </div>
   );
 }

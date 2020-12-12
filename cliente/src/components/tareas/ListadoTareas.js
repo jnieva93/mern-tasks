@@ -21,7 +21,7 @@ const ListadoTareas = () => {
           ? <li className='tarea'><p>No hay tareas</p></li>
           
           : tareasActuales.map(tarea => (
-              <Tarea tarea={tarea} />
+              <Tarea key={tarea.id} tarea={tarea} />
             ))
         }
       </ul>

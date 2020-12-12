@@ -1,4 +1,4 @@
-import { AGREGAR_TAREA, MOSTRAR_ERROR_TAREA, OBTENER_TAREAS } from "../../types";
+import { AGREGAR_TAREA, ELIMINAR_TAREA, MOSTRAR_ERROR_TAREA, OBTENER_TAREAS } from "../../types";
 
 const tareaReducer = (state, action) => {
   switch (action.type) {
@@ -17,6 +17,11 @@ const tareaReducer = (state, action) => {
       return {
         ...state,
         errorTarea: true
+      }
+    case ELIMINAR_TAREA:
+      return {
+        ...state,
+        tareas: state.tareas.filter(tarea => tarea.id !== action.payload)
       }
     default:
       return state;

@@ -1,15 +1,15 @@
 import React, { useReducer } from 'react';
 import TareaContext from './tareaContext';
 import tareaReducer from './tareaReducer';
-import { AGREGAR_TAREA, MOSTRAR_ERROR_TAREA, OBTENER_TAREAS } from '../../types';
+import { AGREGAR_TAREA, ELIMINAR_TAREA, MOSTRAR_ERROR_TAREA, OBTENER_TAREAS } from '../../types';
 
 const TareaState = props => {
   const initialState = {
     tareas: [
-      { nombre: 'Elegir Plataforma', proyectoId: 1, completa: true },
-      { nombre: 'Elegir Colores', proyectoId: 2, completa: false },
-      { nombre: 'Elegir Plataformas de Pago', proyectoId: 3, completa: false },
-      { nombre: 'Elegir Hosting', proyectoId: 1, completa: true }
+      { id: 1, nombre: 'Elegir Plataforma', proyectoId: 1, completa: true },
+      { id: 2, nombre: 'Elegir Colores', proyectoId: 2, completa: false },
+      { id: 3, nombre: 'Elegir Plataformas de Pago', proyectoId: 3, completa: false },
+      { id: 4, nombre: 'Elegir Hosting', proyectoId: 1, completa: true }
     ],
     tareasActuales: null,
     errorTarea: false
@@ -29,6 +29,10 @@ const TareaState = props => {
     dispatch({ type: MOSTRAR_ERROR_TAREA });
   };
 
+  const eliminarTarea = tareaId => {
+    dispatch({ type: ELIMINAR_TAREA, payload: tareaId });
+  };
+
   return (
     <TareaContext.Provider
       value={{
@@ -36,6 +40,7 @@ const TareaState = props => {
         tareas: state.tareas,
         tareasActuales: state.tareasActuales,
         agregarTarea,
+        eliminarTarea,
         mostrarErrorTarea,
         obtenerTareas
       }}

@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import TareaContext from './tareaContext';
 import tareaReducer from './tareaReducer';
-import { AGREGAR_TAREA, ELIMINAR_TAREA, MOSTRAR_ERROR_TAREA, OBTENER_TAREAS } from '../../types';
+import { AGREGAR_TAREA, ELIMINAR_TAREA, ESTADO_TAREA, MOSTRAR_ERROR_TAREA, OBTENER_TAREAS } from '../../types';
 
 const TareaState = props => {
   const initialState = {
@@ -33,6 +33,10 @@ const TareaState = props => {
     dispatch({ type: ELIMINAR_TAREA, payload: tareaId });
   };
 
+  const cambiarEstadoTarea = tarea => {
+    dispatch({ type: ESTADO_TAREA, payload: tarea });
+  };
+
   return (
     <TareaContext.Provider
       value={{
@@ -40,6 +44,7 @@ const TareaState = props => {
         tareas: state.tareas,
         tareasActuales: state.tareasActuales,
         agregarTarea,
+        cambiarEstadoTarea,
         eliminarTarea,
         mostrarErrorTarea,
         obtenerTareas

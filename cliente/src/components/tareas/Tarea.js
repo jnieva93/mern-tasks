@@ -7,10 +7,20 @@ const Tarea = ({ tarea }) => {
   const tareasContext = useContext(TareaContext);
 
   const { proyecto } = proyectosContext;
-  const { eliminarTarea, obtenerTareas } = tareasContext;
+  const { cambiarEstadoTarea, eliminarTarea, obtenerTareas } = tareasContext;
 
   const handleEliminar = tareaId => {
     eliminarTarea(tareaId);
+    obtenerTareas(proyecto.id);
+  };
+
+  const cambiarEstado = tarea => {
+    const tareaCambioEstado = {
+      ...tarea,
+      completa: !tarea.completa
+    };
+
+    cambiarEstadoTarea(tareaCambioEstado);
     obtenerTareas(proyecto.id);
   };
 
@@ -20,11 +30,11 @@ const Tarea = ({ tarea }) => {
       
       <div className='estado'>
         {tarea.completa
-          ? <button type='button' className='completo'>
+          ? <button type='button' className='completo' onClick={() => cambiarEstado(tarea)}>
               Completo
             </button>
 
-          : <button type='button' className='incompleto'>
+          : <button type='button' className='incompleto' onClick={() => cambiarEstado(tarea)}>
               Incompleto
             </button>
         }

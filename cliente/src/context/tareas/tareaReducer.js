@@ -1,4 +1,11 @@
-import { AGREGAR_TAREA, ELIMINAR_TAREA, ESTADO_TAREA, MOSTRAR_ERROR_TAREA, OBTENER_TAREAS } from "../../types";
+import {
+  AGREGAR_TAREA,
+  ELIMINAR_TAREA,
+  ESTADO_TAREA,
+  MOSTRAR_ERROR_TAREA,
+  OBTENER_TAREAS,
+  TAREA_ACTUAL
+} from '../../types';
 
 const tareaReducer = (state, action) => {
   switch (action.type) {
@@ -29,6 +36,11 @@ const tareaReducer = (state, action) => {
         tareas: state.tareas.map(
           tarea => tarea.id === action.payload.id ? action.payload : tarea
         )
+      }
+    case TAREA_ACTUAL:
+      return {
+        ...state,
+        tareaSeleccionada: action.payload
       }
     default:
       return state;

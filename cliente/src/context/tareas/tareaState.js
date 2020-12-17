@@ -1,7 +1,14 @@
 import React, { useReducer } from 'react';
 import TareaContext from './tareaContext';
 import tareaReducer from './tareaReducer';
-import { AGREGAR_TAREA, ELIMINAR_TAREA, ESTADO_TAREA, MOSTRAR_ERROR_TAREA, OBTENER_TAREAS } from '../../types';
+import {
+  AGREGAR_TAREA,
+  ELIMINAR_TAREA,
+  ESTADO_TAREA,
+  MOSTRAR_ERROR_TAREA,
+  OBTENER_TAREAS,
+  TAREA_ACTUAL
+} from '../../types';
 
 const TareaState = props => {
   const initialState = {
@@ -12,7 +19,8 @@ const TareaState = props => {
       { id: 4, nombre: 'Elegir Hosting', proyectoId: 1, completa: true }
     ],
     tareasActuales: null,
-    errorTarea: false
+    errorTarea: false,
+    tareaSeleccionada: null
   };
 
   const [state, dispatch] = useReducer(tareaReducer, initialState);
@@ -37,17 +45,23 @@ const TareaState = props => {
     dispatch({ type: ESTADO_TAREA, payload: tarea });
   };
 
+  const settearTareaActual = tarea => {
+    dispatch({ type: TAREA_ACTUAL, payload: tarea });
+  };
+
   return (
     <TareaContext.Provider
       value={{
         errorTarea: state.errorTarea,
+        tareaSeleccionada: state.tareaSeleccionada,
         tareas: state.tareas,
         tareasActuales: state.tareasActuales,
         agregarTarea,
         cambiarEstadoTarea,
         eliminarTarea,
         mostrarErrorTarea,
-        obtenerTareas
+        obtenerTareas,
+        settearTareaActual
       }}
     >
       {props.children}

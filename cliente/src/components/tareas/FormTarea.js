@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import ProyectoContext from '../../context/proyectos/proyectoContext';
 import TareaContext from '../../context/tareas/tareaContext';
 
@@ -39,7 +40,7 @@ const FormTarea = () => {
     };
 
     if (tareaSeleccionada === null) {
-      const tareaNueva = { ...tarea, proyectoId: proyecto.id };
+      const tareaNueva = { ...tarea, proyectoId: proyecto.id, id: uuidv4() };
   
       agregarTarea(tareaNueva);
     } else {

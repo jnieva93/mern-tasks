@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import TareaContext from './tareaContext';
 import tareaReducer from './tareaReducer';
 import {
+  ACTUALIZAR_TAREA,
   AGREGAR_TAREA,
   ELIMINAR_TAREA,
   ESTADO_TAREA,
@@ -49,6 +50,10 @@ const TareaState = props => {
     dispatch({ type: TAREA_ACTUAL, payload: tarea });
   };
 
+  const actualizarTarea = tarea => {
+    dispatch({ type: ACTUALIZAR_TAREA, payload: tarea });
+  };
+
   return (
     <TareaContext.Provider
       value={{
@@ -56,6 +61,7 @@ const TareaState = props => {
         tareaSeleccionada: state.tareaSeleccionada,
         tareas: state.tareas,
         tareasActuales: state.tareasActuales,
+        actualizarTarea,
         agregarTarea,
         cambiarEstadoTarea,
         eliminarTarea,

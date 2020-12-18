@@ -1,4 +1,5 @@
 import {
+  ACTUALIZAR_TAREA,
   AGREGAR_TAREA,
   ELIMINAR_TAREA,
   ESTADO_TAREA,
@@ -41,6 +42,14 @@ const tareaReducer = (state, action) => {
       return {
         ...state,
         tareaSeleccionada: action.payload
+      }
+    case ACTUALIZAR_TAREA:
+      return {
+        ...state,
+        tareaSeleccionada: null,
+        tareas: state.tareas.map(
+          tarea => tarea.id === action.payload.id ? action.payload : tarea
+        )
       }
     default:
       return state;

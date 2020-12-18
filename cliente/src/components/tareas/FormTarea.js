@@ -9,7 +9,7 @@ const FormTarea = () => {
   const tareasContext = useContext(TareaContext);
 
   const { proyecto } = proyectosContext;
-  const { errorTarea, tareaSeleccionada, agregarTarea, mostrarErrorTarea, obtenerTareas } = tareasContext;
+  const { errorTarea, tareaSeleccionada, actualizarTarea, agregarTarea, mostrarErrorTarea, obtenerTareas } = tareasContext;
 
   const [tarea, setTarea] = useState(tareaInicial);
 
@@ -38,9 +38,14 @@ const FormTarea = () => {
       return;
     };
 
-    const tareaNueva = { ...tarea, proyectoId: proyecto.id };
+    if (tareaSeleccionada === null) {
+      const tareaNueva = { ...tarea, proyectoId: proyecto.id };
+  
+      agregarTarea(tareaNueva);
+    } else {
+      actualizarTarea(tarea);
+    };
 
-    agregarTarea(tareaNueva);
     obtenerTareas(proyecto.id);
     setTarea(tareaInicial);
   };

@@ -1,23 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import ProyectoContext from '../../context/proyectos/proyectoContext';
 import TareaContext from '../../context/tareas/tareaContext';
 import Tarea from './Tarea';
 
-const TareasConTransicion = ({ tareasActuales }) => (
-  <TransitionGroup>
-    {tareasActuales.map(tarea => (
-      <CSSTransition
-        key={tarea.id}
-        timeout={200}
-        classNames='tarea'
-      >
-        <Tarea tarea={tarea} />
-      </CSSTransition>
-    ))}
-  </TransitionGroup> 
-);
+const TareasConTransicion = ({ tareasActuales }) => {
+  const nodeRef = useRef(null);
+
+  return (
+    <TransitionGroup>
+      {tareasActuales.map(tarea => (
+        <CSSTransition
+          key={tarea.id}
+          nodeRef={nodeRef}
+          timeout={200}
+          classNames='tarea'
+        >
+          <div ref={nodeRef}>
+            <Tarea tarea={tarea} />
+          </div>
+        </CSSTransition>
+      ))}
+    </TransitionGroup> 
+  );
+};
 
 const ListadoTareas = () => {
   const proyectosContext = useContext(ProyectoContext);

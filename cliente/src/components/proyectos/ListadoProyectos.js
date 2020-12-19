@@ -1,21 +1,28 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ProyectoContext from '../../context/proyectos/proyectoContext';
 import Proyecto from './Proyecto';
 
-const ProyectosConTransicion = ({ listaProyectos }) => (
-  <TransitionGroup>
-    {listaProyectos.map(proyecto => (
-      <CSSTransition
-        key={proyecto.id}
-        timeout={200}
-        classNames='proyecto'
-      >
-        <Proyecto proyecto={proyecto} />
-      </CSSTransition>
-    ))}
-  </TransitionGroup>
-);
+const ProyectosConTransicion = ({ listaProyectos }) => {
+  const nodeRef = useRef(null);
+  
+  return (
+    <TransitionGroup>
+      {listaProyectos.map(proyecto => (
+        <CSSTransition
+          key={proyecto.id}
+          nodeRef={nodeRef}
+          timeout={200}
+          classNames='proyecto'
+        >
+          <div ref={nodeRef}>
+            <Proyecto proyecto={proyecto} />
+          </div>
+        </CSSTransition>
+      ))}
+    </TransitionGroup>
+  );
+};
 
 const ListadoProyectos = () => {
   const proyectosContext = useContext(ProyectoContext);

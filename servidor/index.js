@@ -6,6 +6,9 @@ const app = express();
 
 const PORT = process.env.PORT || 4000;
 
+// Importa rutas
+app.use('/api/usuarios', require('./routes/usuarios'));
+
 // Conecta a la base de datos
 conectarDB();
 

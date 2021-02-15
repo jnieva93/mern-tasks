@@ -4,13 +4,16 @@ const conectarDB = require('./config/db');
 // Creación del servidor
 const app = express();
 
+// Conecta a la base de datos
+conectarDB();
+
+// Habilita express.json
+app.use(express.json({ extended: true }));
+
 const PORT = process.env.PORT || 4000;
 
 // Importa rutas
 app.use('/api/usuarios', require('./routes/usuarios'));
-
-// Conecta a la base de datos
-conectarDB();
 
 // Inicia app
 app.listen(PORT, () => {
